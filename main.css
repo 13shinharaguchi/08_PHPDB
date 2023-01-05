@@ -1,0 +1,11 @@
+.all_display {
+    background-color: brown;
+    height: 100px;
+}
+
+.under {
+    display: flex;
+    justify-content: space-between;
+    height: auto;
+    margin-top: 400px;
+}
