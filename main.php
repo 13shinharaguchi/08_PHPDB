@@ -11,8 +11,8 @@ try {
     exit();
 }
 
-// SQL作成&実行
-$sql = 'SELECT * FROM memo_card_table ORDER BY created_at DESC';
+// SQL作成&実行,
+$sql = 'SELECT * FROM memo_card_table ORDER BY created_at ASC LIMIT 5 ';
 
 $stmt = $pdo->prepare($sql);
 
@@ -27,16 +27,8 @@ try {
 }
 
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-$output = "";
-foreach ($result as $record) {
-    $output .= "
-    <tr>
-      <td>{$record["title"]}</td>
-      <td>{$record["content"]}</td>
-      <td>{$record["energy_consumption"]}</td>
-    </tr>
-  ";
-}
+
+
 
 ?>
 
@@ -53,24 +45,32 @@ foreach ($result as $record) {
 
 <body>
     <div class="all_display">
-        <?= $output ?>
+        <?php foreach ($result as $memo) : ?>
+            <div class="memo_list_wrapper">
+                <div class="memo_list">
+                    <div><?php echo $memo['title'] ?></div>
+                    <div><?php echo $memo['content'] ?></div>
+                    <div><?php echo $memo['energy_consumption'] ?></div>
+                </div>
+            </div>
+        <?php endforeach; ?>
     </div>
     <div class="under">
         <div class="memo_input">
             <form action="memo_create.php" method="POST">
-                <div>
+                <div class="title_wrapper">
                     <label for="title">タイトル</label>
                     <input type="text" name="title">
                 </div>
-                <div>
+                <div class="content_wrapper">
                     <label for="content">意識すること</label>
-                    <input type="text" name="content">
+                    <textarea name="content"></textarea>
                 </div>
-                <div>
+                <div class="energy_wrapper">
                     <label for="energy">消費エネルギー</label>
                     <input type="number" name="energy">
                 </div>
-                <button type="submit">送信</button>
+                <button type="submit">かける</button>
             </form>
         </div>
         <div class="pop_display">
