@@ -1,11 +1,41 @@
+body {
+    margin: 0 0;
+}
+
+
 .all_display {
-    background-color: brown;
-    height: 100px;
+
+    display: flex;
+    justify-content: space-between;
 }
 
 .under {
     display: flex;
     justify-content: space-between;
     height: auto;
-    margin-top: 400px;
+}
+
+.memo_list_wrapper {
+    background-color: antiquewhite;
+    height: 200px;
+    width: 200px;
+}
+
+.memo_list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.memo_input{
+    width: 50%;
+}
+
+.pop_display{
+    width: 50%;
+}
+
+label,input {
+    display: block;
 }
