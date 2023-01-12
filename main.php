@@ -1,22 +1,12 @@
 <?php
-$dbn = 'mysql:dbname=wear_memo;charset=utf8mb4;port=3306;host=localhost';
-$user = 'root';
-$pwd = '';
-
-// DB接続
-try {
-    $pdo = new PDO($dbn, $user, $pwd);
-} catch (PDOException $e) {
-    echo json_encode(["ここにデータベースのエラーが表示できるぞ" => "{$e->getMessage()}"]);
-    exit();
-}
+//sqlの接続を簡単にする
+include('function.php');
+$pdo = Preparation();
 
 // SQL作成&実行,
-$sql = 'SELECT * FROM memo_card_table ORDER BY created_at ASC LIMIT 5 ';
+$sql = 'SELECT * FROM memo_card_table ORDER BY created_at DESC LIMIT 5 ';
 
 $stmt = $pdo->prepare($sql);
-
-// バインド変数処理はいらない
 
 // SQL実行（実行に失敗すると `sql error ...` が出力される）
 try {
@@ -28,6 +18,11 @@ try {
 
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+
+// echo '<pre>';
+// var_dump($result);
+// echo '</pre>';
+// exit();
 
 
 ?>
@@ -55,7 +50,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </div>
         <?php endforeach; ?>
     </div>
-    <div class="under">
+    <div class="entry_field">
         <div class="memo_input">
             <form action="memo_create.php" method="POST">
                 <div class="title_wrapper">
@@ -71,6 +66,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <input type="number" name="energy">
                 </div>
                 <button type="submit">かける</button>
+                <a href="list_select.php">一覧画面</a>
             </form>
         </div>
         <div class="pop_display">
