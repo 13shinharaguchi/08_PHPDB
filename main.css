@@ -9,7 +9,7 @@ body {
     justify-content: space-between;
 }
 
-.under {
+.entry_field {
     display: flex;
     justify-content: space-between;
     height: auto;
