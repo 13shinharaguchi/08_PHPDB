@@ -43,3 +43,5 @@
  ## メモ
  - リレーションして、表示する
  <!-- SELECT * FROM `member_table`,`memo_card_table` WHERE member_table.ID=memo_card_table.member_id; -->
+
+ # 2023/1/17より作成項目はイシューに切り替える
